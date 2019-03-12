@@ -15,13 +15,13 @@ FSJS project 2 - List Filter and Pagination
    will only be used inside of a function, then it can be locally
    scoped to that function.
 ***/
-let list = document.querySelectorAll('.student-details');
-console.log(list);
+
+
 //const studentArray = [];
-let totalItems = list.length;
+
 //console.log(totalItems);
-const pageSize = 10;
-page = [];
+
+
 
 /***
    Create the `showPage` function to hide all of the items in the
@@ -35,19 +35,25 @@ page = [];
        you initially define the function, and it acts as a variable
        or a placeholder to represent the actual function `argument`
        that will be passed into the parens later when you call or
-       "invoke" the function
+       "invoke" the function``````````````````````````````
 ***/
+let students = document.querySelectorAll('.student-item');
+console.log(students);
+let totalItems = students.length;
+console.log(totalItems);
+const pageSize = 10;
+
 const showPage = (list, page) => {
-  let i;
-  for (i = 0; i <= totalItems.length; i++) {
-    if (index[i] >= page[i][0] && index[i] <= page[i][9]) {
-      list.style.display == block;
+  for (let i = 0; i <= students.length; i++) {
+    console.log(students);
+    if (i >= ((page * pageSize) - pageSize) && (i <= (page * pageSize))) {
+      students[i].style.display = "block";
+    } else {
+      students[i].style.display = "none";
     }
-    else {
-     list.style.display == none;
-    };
-  };
+  }
 };
+
 /***
    Create the `appendPageLinks function` to generate, append, and add
    functionality to the pagination buttons.
@@ -74,13 +80,15 @@ const appendPageLinks = (list) => {
     li.className = 'pagination li';
     a.className = 'pagination li a';
     a.innerHTML = [i+1];
-    a.addEventListener("click", showPage);
-    console.log(a);
+    page = a.textContent;
+    console.log(page);
+    a.addEventListener('click', (e) => {
+      a.classList.remove('active');
+      showPage(students, page);
+    });
   };
 
-let buttons = document.getElementsByTagName("a").innerText;
-page.push(buttons);
-console.log(buttons);
+
   //  for (i = 0; i<=totalPages.length; i++) {
   //    a.remove('active');
   //  };
