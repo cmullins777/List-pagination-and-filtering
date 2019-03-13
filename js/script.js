@@ -32,6 +32,7 @@ const showPage = (list, page) => {
   }
 };
 showPage(students, [1]);
+
 /***
    Create appendPage function,
    create page links dynamically for number of totalPages and append to ul, append to page div
@@ -58,9 +59,11 @@ const appendPageLinks = (list) => {
     a.className = 'pagination li a';
     a.innerHTML = [i+1];
     let page = parseInt(a.textContent);
+    let firstPage = document.getElementsByTagName("a")[0];
+    firstPage.className = "active";
     a.addEventListener('click', (e) => {
-      a.classList.remove('active');
       showPage(students, e.target.textContent);
+      firstPage.classList.remove("active");
     });
   };
 };
